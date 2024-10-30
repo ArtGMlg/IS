@@ -1,0 +1,9 @@
+Produce Ship1 typeof SpaceshipType
+Game can command SetFuelCommand to SpaceshipType Ship1
+Player John can command SpaceshipType Ship1 StartCommand, RotateCommand, CreateJetCommand
+StartCommand includes StartMoveCommand
+StartMoveCommand includes BurnFuelCommand, CollisionCommand, MoveCommand
+CreateJetCommand includes Produce Jet1 typeof JetType
+Player John can command JetType Jet1 FireCommand
+Game can command CreatePlantMineCommand every 75 seconds
+Game can command DetermineWinnerCommand
