@@ -191,10 +191,7 @@
         break;
       }
 
-      foreach (var firstSymbol in first[symbol])
-      {
-        result.Add(firstSymbol);
-      }
+      result.UnionWith(first[symbol]);
 
       if (!first[symbol].Contains("ε"))
       {
@@ -325,5 +322,8 @@ class Program
     
     string input3 = "id ( id , id + n , true )";
     parser.Parse(input3);
+    
+    string input4 = "( n <= id ) == true";
+    parser.Parse(input4);
   }
 }
