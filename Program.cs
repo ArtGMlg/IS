@@ -5,6 +5,9 @@
   private readonly Dictionary<string, HashSet<string>> follow;
   private readonly Dictionary<string, Dictionary<string, string>> table;
   private readonly Stack<string> stack;
+  private readonly HashSet<string> terminals;
+  private readonly List<string> nonTerminals;
+
 
   public LL1Parser()
   {
@@ -13,6 +16,8 @@
     follow = [];
     table = [];
     stack = new Stack<string>();
+    terminals = [];
+    nonTerminals = [];
   }
 
   public void DefineGrammar()
@@ -28,6 +33,22 @@
     grammar["RelOp"] = ["==", "!=", "<", ">", "<=", ">="];
     grammar["AddOp"] = ["+", "-"];
     grammar["MulOp"] = ["*", "/"];
+
+    grammar.Keys.ToList().ForEach(nonTerminals.Add);
+
+    grammar.Values.ToList().ForEach((production) =>
+    {
+      production.ForEach((rule) =>
+      {
+        rule.Split(' ').ToList().ForEach((s) =>
+        {
+          if (!nonTerminals.Contains(s))
+          {
+            terminals.Add(s);
+          }
+        });
+      });
+    });
 
     ComputeFirst();
     foreach (var entry in first)
@@ -73,7 +94,7 @@
     while (changed)
     {
       changed = false;
-      
+
       foreach (var rule in grammar)
       {
         string A = rule.Key;
@@ -241,70 +262,41 @@
 
             value[followSymbol] = production;
           }
+          table[A]["ε"] = "ε";
         }
       }
     }
   }
 
-  public bool Parse(string input)
+  public void Parse(string input)
   {
     stack.Clear();
     stack.Push("S");
 
-    string[] tokens = input.Split(' ');
-    int index = 0;
+    List<string> tokens = [.. input.Split(' ')];
 
-    while (stack.Count > 0)
+    Dictionary<string, IStateFactory> factories = [];
+
+    var terminalFactory = new TerminalStateFactory(table);
+    foreach (var terminal in terminals)
     {
-      string top = stack.Pop();
-
-      if (!grammar.ContainsKey(top))
-      {
-        if (top == tokens[index])
-        {
-          index++;
-          if (index >= tokens.Length) break;
-        }
-        else
-        {
-          Console.WriteLine($"Error: Expected {top}, but found {tokens[index]}");
-          return false;
-        }
-      }
-      else
-      {
-        if (table.ContainsKey(top) && table[top].ContainsKey(tokens[index]))
-        {
-          string production = table[top][tokens[index]];
-          string[] productionSymbols = production.Split(' ');
-
-          for (int i = productionSymbols.Length - 1; i >= 0; i--)
-          {
-            if (productionSymbols[i] != "ε")
-              stack.Push(productionSymbols[i]);
-          }
-        }
-        else
-        {
-          Console.WriteLine($"Error: No rule for {top} with token {tokens[index]}");
-          return false;
-        }
-      }
+      factories[terminal] = terminalFactory;
     }
 
-    if (index == tokens.Length)
+    var nonTerminalFactory = new NonTerminalStateFactory(table);
+    foreach (var nonTerminal in nonTerminals)
     {
-      Console.WriteLine("Input parsed successfully.");
-      Console.WriteLine($"Строка \"{input}\" принадлежит языку");
-      return true;
+      factories[nonTerminal] = nonTerminalFactory;
     }
-    else
+
+    IState? state = new StartState(stack, tokens, table, factories);
+
+    while (state != null)
     {
-      Console.WriteLine("Error: Input not fully consumed.");
-      Console.WriteLine($"Строка \"{input}\" не принадлежит языку");
-      return false;
+      state = state.Next();
     }
   }
+
 }
 
 class Program
@@ -316,14 +308,17 @@ class Program
 
     string input1 = "n + id * n";
     parser.Parse(input1);
-    
+
     string input2 = "( id < n ) && ( true || false )";
     parser.Parse(input2);
-    
+
     string input3 = "id ( id , id + n , true )";
     parser.Parse(input3);
-    
+
     string input4 = "( n <= id ) == true";
     parser.Parse(input4);
+
+    string input5 = "( ( n + n ) * n - n ) == n";
+    parser.Parse(input5);
   }
 }
