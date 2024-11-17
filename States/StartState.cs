@@ -24,11 +24,6 @@ public class StartState : IState
 
   public IState? Next()
   {
-    if (_stack.Count == 0)
-    {
-      return _tokens.Count == 0 ? new AcceptState() : new ErrorState($"Input not fully consumed: Remaining {_tokens.Aggregate((res, next) => res + ' ' + next)}");
-    }
-
     try
     {
       string top = _stack.Pop();
