@@ -45,7 +45,7 @@ public class StartState : IState
     }
     catch (Exception err)
     {
-      return new ErrorState(err.ToString());
+      return new ErrorState(err.Message);
     }
   }
 }
