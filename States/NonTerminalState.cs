@@ -26,8 +26,6 @@ public class NonTerminalState : IState
 
   public IState? Next()
   {
-    List<string> strings = [];
-    
     var token = _tokens.FirstOrDefault("ε");
 
     SkipOrThrow.CheckKnownToken(_table, _top, token);
