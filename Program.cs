@@ -7,7 +7,7 @@
   private readonly Stack<string> stack;
   private readonly HashSet<string> terminals;
   private readonly List<string> nonTerminals;
-
+  private readonly Dictionary<string, IStateFactory> factories = [];
 
   public LL1Parser()
   {
@@ -266,16 +266,6 @@
         }
       }
     }
-  }
-
-  public void Parse(string input)
-  {
-    stack.Clear();
-    stack.Push("S");
-
-    List<string> tokens = [.. input.Split(' ')];
-
-    Dictionary<string, IStateFactory> factories = [];
 
     var terminalFactory = new TerminalStateFactory(table);
     foreach (var terminal in terminals)
@@ -288,6 +278,14 @@
     {
       factories[nonTerminal] = nonTerminalFactory;
     }
+  }
+
+  public void Parse(string input)
+  {
+    stack.Clear();
+    stack.Push("S");
+
+    List<string> tokens = [.. input.Split(' ')];
 
     IState? state = new StartState(stack, tokens, table, factories);
 
