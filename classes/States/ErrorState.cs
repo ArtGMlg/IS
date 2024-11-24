@@ -10,6 +10,6 @@ public class ErrorState : IState
   }
   public IState Next()
   {
-    throw new InvalidOperationException("{Name}: Cannot move to the next floor!");
+    throw new InvalidOperationException($"{elevator.Name}: Cannot move to the next floor!\nThe elevator failed to execute command {elevator.CurrentCommand} while moving from floor {elevator.CurrentFloor} to floor {elevator.TargetFloor}");
   }
 }

@@ -1,9 +1,9 @@
-public class MovedownState : IState
+public class MoveDownState : IState
 {
   private readonly Elevator elevator;
   private readonly Dictionary<int, Dictionary<ElevatorCommands, IStateFactory>> transitions;
 
-  public MovedownState(Elevator _elevator, Dictionary<int, Dictionary<ElevatorCommands, IStateFactory>> _transitions)
+  public MoveDownState(Elevator _elevator, Dictionary<int, Dictionary<ElevatorCommands, IStateFactory>> _transitions)
   {
     elevator = _elevator;
     transitions = _transitions;

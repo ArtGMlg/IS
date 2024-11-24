@@ -19,15 +19,15 @@ public class Elevator
     {
       transitions[i] = new Dictionary<ElevatorCommands, IStateFactory>
       {
-        { ElevatorCommands.MoveUp, new MoveupStateFactory() },
-        { ElevatorCommands.MoveDown, new MovedownStateFactory() },
+        { ElevatorCommands.MoveUp, new MoveUpStateFactory() },
+        { ElevatorCommands.MoveDown, new MoveDownStateFactory() },
         { ElevatorCommands.OpenDoors, new OpenDoorsStateFactory() },
         { ElevatorCommands.None, new FinalStateFactory() },
       };
     }
     transitions[1] = new Dictionary<ElevatorCommands, IStateFactory>
     {
-      { ElevatorCommands.MoveUp, new MoveupStateFactory() },
+      { ElevatorCommands.MoveUp, new MoveUpStateFactory() },
       { ElevatorCommands.MoveDown, new ErrorStateFactory() },
       { ElevatorCommands.OpenDoors, new OpenDoorsStateFactory() },
       { ElevatorCommands.None, new FinalStateFactory() },
@@ -35,7 +35,7 @@ public class Elevator
     transitions[numFloors] = new Dictionary<ElevatorCommands, IStateFactory>
     {
       { ElevatorCommands.MoveUp, new ErrorStateFactory() },
-      { ElevatorCommands.MoveDown, new MovedownStateFactory() },
+      { ElevatorCommands.MoveDown, new MoveDownStateFactory() },
       { ElevatorCommands.OpenDoors, new OpenDoorsStateFactory() },
       { ElevatorCommands.None, new FinalStateFactory() },
     };
