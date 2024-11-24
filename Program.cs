@@ -1,5 +1,26 @@
-﻿List<List<int>> requests = [[1, 10], [3, 11], [2, 6], [9, 4], [8, 9], [11, 5], [7, 4], [6, 3], [10, 11], [12, 8], [5, 2], [1, 7], [4, 12], [6, 8], [3, 5]];
+﻿List<List<int>> requests = [
+  [2, 15],
+  [6, 10],
+  [14, 3],
+  [8, 1],
+  [10, 5],
+  [7, 13],
+  [3, 9],
+  [12, 2],
+  [9, 4],
+  [1, 16],
+  [13, 6],
+  [5, 8],
+  [16, 7],
+  [4, 14],
+  [15, 11],
+  [11, 3],
+  [10, 12],
+  [8, 5],
+  [2, 9],
+  [6, 16]
+];
 
-ElevatorController elevatorController = new(12, [("Elevator 1", 6), ("Elevator 2", 4)]);
+ElevatorController elevatorController = new(16, [("Elevator 1", 4), ("Elevator 2", 11)]);
 
 elevatorController.DistributeAndExecuteRequests(requests);
