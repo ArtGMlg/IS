@@ -1,17 +1,14 @@
 public class StartState : IState
 {
-  private readonly Elevator elevator;
-  private readonly Dictionary<int, Dictionary<ElevatorCommands, IStateFactory>> transitions;
+  private readonly Evaluator evaluator;
 
-  public StartState(Elevator _elevator, Dictionary<int, Dictionary<ElevatorCommands, IStateFactory>> _transitions)
+  public StartState(Evaluator _evaluator)
   {
-    elevator = _elevator;
-    transitions = _transitions;
+    evaluator = _evaluator;
   }
   public IState Next()
   {
-    elevator.CloseDoors();
-    elevator.ComputeNextCommand();
-    return new State(elevator, transitions);
+    evaluator.GetElevator().CloseDoors();
+    return new State(evaluator);
   }
 }

@@ -1,15 +1,13 @@
 public class ErrorState : IState
 {
-  private readonly Elevator elevator;
-  private readonly Dictionary<int, Dictionary<ElevatorCommands, IStateFactory>> transitions;
+  private readonly Evaluator evaluator;
 
-  public ErrorState(Elevator _elevator, Dictionary<int, Dictionary<ElevatorCommands, IStateFactory>> _transitions)
+  public ErrorState(Evaluator _evaluator)
   {
-    elevator = _elevator;
-    transitions = _transitions;
+    evaluator = _evaluator;
   }
   public IState Next()
   {
-    throw new InvalidOperationException($"{elevator.Name}: Cannot move to the next floor!\nThe elevator failed to execute command {elevator.CurrentCommand} while moving from floor {elevator.CurrentFloor} to floor {elevator.TargetFloor}");
+    throw new InvalidOperationException($"{evaluator.GetElevator().Name}: Cannot move to the next floor!\nThe elevator failed to execute command while moving from floor {evaluator.GetElevator().CurrentFloor} to floor {evaluator.GetElevator().TargetFloor}");
   }
 }

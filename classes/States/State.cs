@@ -1,15 +1,13 @@
 public class State : IState
 {
-  private readonly Elevator elevator;
-  private readonly Dictionary<int, Dictionary<ElevatorCommands, IStateFactory>> transitions;
+  private readonly Evaluator evaluator;
 
-  public State(Elevator _elevator, Dictionary<int, Dictionary<ElevatorCommands, IStateFactory>> _transitions)
+  public State(Evaluator _evaluator)
   {
-    elevator = _elevator;
-    transitions = _transitions;
+    evaluator = _evaluator;
   }
   public IState Next()
   {
-    return transitions[elevator.CurrentFloor][elevator.CurrentCommand].CreateState(elevator, transitions);
+    return evaluator.Decide();
   }
 }

@@ -1,18 +1,15 @@
 public class MoveUpState : IState
 {
-  private readonly Elevator elevator;
-  private readonly Dictionary<int, Dictionary<ElevatorCommands, IStateFactory>> transitions;
+  private readonly Evaluator evaluator;
 
-  public MoveUpState(Elevator _elevator, Dictionary<int, Dictionary<ElevatorCommands, IStateFactory>> _transitions)
+  public MoveUpState(Evaluator _evaluator)
   {
-    elevator = _elevator;
-    transitions = _transitions;
+    evaluator = _evaluator;
   }
   public IState Next()
   {
-    elevator.CurrentFloor += 1;
-    elevator.ComputeNextCommand();
-    Console.WriteLine($"{elevator.Name}: The elevator went up from floor {elevator.CurrentFloor - 1} to floor {elevator.CurrentFloor}");
-    return new State(elevator, transitions);
+    evaluator.GetElevator().CurrentFloor += 1;
+    Console.WriteLine($"{evaluator.GetElevator().Name}: The elevator went up from floor {evaluator.GetElevator().CurrentFloor - 1} to floor {evaluator.GetElevator().CurrentFloor}");
+    return new State(evaluator);
   }
 }

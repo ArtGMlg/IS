@@ -1,8 +1,8 @@
 
 public class MoveUpStateFactory : IStateFactory
 {
-  public IState CreateState(Elevator elevator, Dictionary<int, Dictionary<ElevatorCommands, IStateFactory>> transitions)
+  public IState CreateState(Evaluator evaluator)
   {
-    return new MoveUpState(elevator, transitions);
+    return new MoveUpState(evaluator);
   }
 }

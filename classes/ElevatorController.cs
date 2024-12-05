@@ -1,6 +1,6 @@
 public class ElevatorController
 {
-  private readonly List<Elevator> _elevators;
+  private readonly List<Evaluator> _elevators;
   private List<List<int>> _requests;
 
   public ElevatorController(int numFloors, List<(string, int)> elevatorsInfo)
@@ -8,7 +8,7 @@ public class ElevatorController
     _elevators = [];
     elevatorsInfo.ForEach((info) =>
     {
-      _elevators.Add(new Elevator(info.Item2, numFloors, info.Item1));
+      _elevators.Add(new Evaluator(new Elevator(info.Item2, info.Item1), numFloors));
     });
     _requests = [];
   }
@@ -16,21 +16,25 @@ public class ElevatorController
   public void DistributeAndExecuteRequests(List<List<int>> requests)
   {
     _requests = [.. requests];
-    while (_requests.Count != 0)
-    {
-      List<int> request = _requests.First();
-      Elevator? elevator1 = FindClosestElevator(request.First());
+    _requests.ForEach((request) => {
+      Evaluator elevator1 = FindClosestElevator(request.First());
 
-      elevator1?.Proceed(request);
-
-      _requests = _requests[1..];
-    }
+      request.ForEach((reqFloor) => {
+        elevator1.GetElevator().TargetFloor = reqFloor;
+        IState? state = new StartState(elevator1);
+        
+        while (state != null)
+        {
+          state = state.Next();
+        }
+      });
+    });
   }
 
-  private Elevator FindClosestElevator(int targetFloor)
+  private Evaluator FindClosestElevator(int targetFloor)
   {
     return _elevators
-      .OrderBy(e => Math.Abs(e.CurrentFloor - targetFloor))
+      .OrderBy(e => Math.Abs(e.GetElevator().CurrentFloor - targetFloor))
       .First();
   }
 }
