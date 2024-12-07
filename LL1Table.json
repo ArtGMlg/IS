@@ -1,0 +1,138 @@
+{
+  "S": {
+    "(": "E",
+    "n": "E",
+    "true": "E",
+    "false": "E",
+    "id": "E",
+    "name": "E",
+    "function": "E",
+    "let": "E"
+  },
+  "E": {
+    "(": "T E\u0027",
+    "n": "T E\u0027",
+    "true": "T E\u0027",
+    "false": "T E\u0027",
+    "id": "T E\u0027",
+    "name": "T E\u0027",
+    "function": "T E\u0027",
+    "let": "T E\u0027"
+  },
+  "E\u0027": {
+    "||": "|| T E\u0027",
+    "==": "RelOp T",
+    "!=": "RelOp T",
+    "\u003C": "RelOp T",
+    "\u003E": "RelOp T",
+    "\u003C=": "RelOp T",
+    "\u003E=": "RelOp T",
+    "$": "\u03B5",
+    ")": "\u03B5",
+    ",": "\u03B5",
+    "}": "\u03B5",
+    ";": "\u03B5",
+    "\u03B5": "\u03B5"
+  },
+  "T": {
+    "(": "F T\u0027",
+    "n": "F T\u0027",
+    "true": "F T\u0027",
+    "false": "F T\u0027",
+    "id": "F T\u0027",
+    "name": "F T\u0027",
+    "function": "F T\u0027",
+    "let": "F T\u0027"
+  },
+  "T\u0027": {
+    "\u0026\u0026": "\u0026\u0026 F T\u0027",
+    "\u002B": "AddOp F T\u0027",
+    "-": "AddOp F T\u0027",
+    "*": "MulOp F T\u0027",
+    "/": "MulOp F T\u0027",
+    "return": "return id",
+    "||": "\u03B5",
+    "==": "\u03B5",
+    "!=": "\u03B5",
+    "\u003C": "\u03B5",
+    "\u003E": "\u03B5",
+    "\u003C=": "\u03B5",
+    "\u003E=": "\u03B5",
+    "$": "\u03B5",
+    ")": "\u03B5",
+    ",": "\u03B5",
+    "}": "\u03B5",
+    ";": "\u03B5",
+    "\u03B5": "\u03B5"
+  },
+  "F": {
+    "(": "( E )",
+    "n": "Const",
+    "true": "Const",
+    "false": "Const",
+    "id": "Var",
+    "name": "FuncCall",
+    "function": "FuncDef",
+    "let": "VarDef"
+  },
+  "Const": {
+    "n": "n",
+    "true": "true",
+    "false": "false"
+  },
+  "Var": {
+    "id": "id"
+  },
+  "FuncCall": {
+    "name": "name ( Args )"
+  },
+  "Args": {
+    "(": "E Args\u0027",
+    "n": "E Args\u0027",
+    "true": "E Args\u0027",
+    "false": "E Args\u0027",
+    "id": "E Args\u0027",
+    "name": "E Args\u0027",
+    "function": "E Args\u0027",
+    "let": "E Args\u0027",
+    ")": "\u03B5",
+    "\u03B5": "\u03B5"
+  },
+  "Args\u0027": {
+    ",": ", E Args\u0027",
+    ")": "\u03B5",
+    "\u03B5": "\u03B5"
+  },
+  "RelOp": {
+    "==": "==",
+    "!=": "!=",
+    "\u003C": "\u003C",
+    "\u003E": "\u003E",
+    "\u003C=": "\u003C=",
+    "\u003E=": "\u003E="
+  },
+  "AddOp": {
+    "\u002B": "\u002B",
+    "-": "-"
+  },
+  "MulOp": {
+    "*": "*",
+    "/": "/"
+  },
+  "FuncDef": {
+    "function": "function name ( Params ) { E }"
+  },
+  "Params": {
+    "id": "id Params\u0027",
+    ")": "\u03B5",
+    "\u03B5": "\u03B5"
+  },
+  "Params\u0027": {
+    ",": ", id Params\u0027",
+    ")": "\u03B5",
+    "\u03B5": "\u03B5"
+  },
+  "VarDef": {
+    "let": "let id = E ;"
+  }
+}

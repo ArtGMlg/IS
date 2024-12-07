@@ -1,0 +1,7 @@
+n + id * n
+( id < n ) && ( true || false )
+name ( id , id + n , true )
+( n <= id ) == true
+( ( n + n ) * n - n ) == n
+function name ( id , id ) { let id = id + id ; return id }
+let id = name ( id , id ) ;

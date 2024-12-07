@@ -1,0 +1,26 @@
+S -> E
+
+E -> T E'
+E' -> || T E', RelOp T, ε
+
+T -> F T'
+T' -> && F T', AddOp F T', MulOp F T', return id, ε
+
+F -> ( E ), Const, Var, FuncCall, FuncDef, VarDef
+
+Const -> n, true, false
+Var -> id
+FuncCall -> name ( Args )
+
+Args -> E Args', ε
+Args' -> , E Args', ε
+
+RelOp -> ==, !=, <, >, <=, >=
+AddOp -> +, -
+MulOp -> *, /
+
+FuncDef -> function name ( Params ) { E }
+Params -> id Params', ε
+Params' -> , id Params', ε
+
+VarDef -> let id = E ;
