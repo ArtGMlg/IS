@@ -5,16 +5,12 @@ public class LL1Parser
 {
   private Dictionary<string, Dictionary<string, string>> table;
   private readonly Stack<string> stack;
-  private readonly HashSet<string> terminals;
-  private readonly List<string> nonTerminals;
   private readonly Dictionary<string, IStateFactory> factories = [];
 
   public LL1Parser()
   {
     table = [];
     stack = new Stack<string>();
-    terminals = [];
-    nonTerminals = [];
   }
 
   public void LoadUpTable (string path)
@@ -34,28 +30,28 @@ public class LL1Parser
       var terminalFactory = new TerminalStateFactory(table);
       var nonTerminalFactory = new NonTerminalStateFactory(table);
 
-      table.Keys.ToList().ForEach(nonTerminal => {
-        factories.TryAdd(nonTerminal, nonTerminalFactory);
-      });
+      Dictionary<string, IStateFactory> nonTerminalsFactories = [];
 
-      table.Values.ToList().ForEach((ruleSet) =>
+      table.Keys.
+        ToList()
+        .ForEach(nonTerminal => nonTerminalsFactories.TryAdd(nonTerminal, nonTerminalFactory));
+
+      table.Values
+        .SelectMany(ruleSet => ruleSet.Keys)
+        .ToList()
+        .ForEach(terminal => factories.TryAdd(terminal, terminalFactory));
+
+      table.Values
+        .SelectMany(ruleSet => ruleSet.Values)
+        .SelectMany(r => r.Split(' '))
+        .Where(s => !nonTerminalsFactories.ContainsKey(s))
+        .ToList()
+        .ForEach(s => factories.TryAdd(s, terminalFactory));
+
+      nonTerminalsFactories.ToList().ForEach(pair =>
       {
-        ruleSet.Keys.ToList().ForEach((terminal) => {
-          factories.TryAdd(terminal, terminalFactory);
-        });
-
-        ruleSet.Values.ToList().ForEach((r) => {
-          r.Split(' ').ToList().ForEach((s) =>
-          {
-            if (!nonTerminals.Contains(s))
-            {
-              factories.TryAdd(s, terminalFactory);
-            }
-          });
-        });
-      });
-
-      var a = 10;
+        factories.TryAdd(pair.Key, pair.Value);
+      });  
       
     }
     catch (IOException e)
