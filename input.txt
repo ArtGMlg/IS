@@ -1,0 +1,5 @@
+let id = num ;
+let id = num ;
+let id = ( id < id ) && ( true || false ) ;
+function id ( id ) { let id = num + num ; return id ; } ;
+id ( id ) ;

@@ -1,0 +1,36 @@
+S -> STATEMENTS
+STATEMENTS -> STATEMENT ; STATEMENTS
+STATEMENTS -> ''
+STATEMENT -> FUNC_DECL
+STATEMENT -> VAR_DECL
+STATEMENT -> RETURN_STMT
+STATEMENT -> E
+FUNC_DECL -> function ID ( PARAMS ) { STATEMENTS }
+PARAMS -> ID , PARAMS
+PARAMS -> ID
+PARAMS -> ''
+VAR_DECL -> let ID = E
+RETURN_STMT -> return E
+E -> E + T
+E -> E - T
+E -> E || T
+E -> E && T
+E -> T
+T -> T * F
+T -> T / F
+T -> T == F
+T -> T != F
+T -> T > F
+T -> T < F
+T -> F
+F -> true
+F -> false
+F -> ( E )
+F -> ID
+F -> NUM
+F -> ID ( E_LIST )
+E_LIST -> E , E_LIST
+E_LIST -> E
+E_LIST -> ''
+ID -> id
+NUM -> num
