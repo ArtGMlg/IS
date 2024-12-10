@@ -23,10 +23,6 @@ public class ReduceState : IState
   public IState Next()
   {
     (string, List<string>) grammarRule = lexer.GetRuleByNum(rule);
-    if (rule == 2)
-    {
-      var a = 10;
-    }
     grammarRule.Item2.Where(s => s != "''").ToList().ForEach((rm) =>
     {
       statesStack.Pop();
