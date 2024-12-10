@@ -22,6 +22,8 @@ T -> T == F
 T -> T != F
 T -> T > F
 T -> T < F
+T -> T >= F
+T -> T <= F
 T -> F
 F -> true
 F -> false

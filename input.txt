@@ -1,5 +1,7 @@
-let id = num ;
-let id = num ;
-let id = ( id < id ) && ( true || false ) ;
-function id ( id ) { let id = num + num ; return id ; } ;
-id ( id ) ;
+num + id * num ;
+( id < num ) && ( true || false ) ;
+id ( id , id + num , true ) ;
+( num <= id ) == true ;
+( ( num + num ) * num - num ) == num ;
+function id ( id , id ) { let id = id + id ; return id ; } ;
+let id = id ( id , id ) ;
