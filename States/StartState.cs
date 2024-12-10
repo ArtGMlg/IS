@@ -1,25 +1,20 @@
-using System.Diagnostics.CodeAnalysis;
 using Helpers;
 
 public class StartState : IState
 {
+  private LL1Lexer _lexer;
   private readonly Stack<string> _stack;
   private readonly List<string> _tokens;
-  private readonly Dictionary<string, Dictionary<string, string>> _table;
-  private readonly Dictionary<string, IStateFactory> _factories;
 
   public StartState(
+    LL1Lexer lexer,
     Stack<string> stack,
-    List<string> tokens,
-    Dictionary<string, Dictionary<string, string>> table,
-    Dictionary<string, IStateFactory> factories
+    List<string> tokens
   )
   {
+    _lexer = lexer;
     _stack = stack;
     _tokens = tokens;
-    _table = table;
-
-    _factories = factories;
   }
 
   public IState? Next()
@@ -28,11 +23,11 @@ public class StartState : IState
     {
       string top = _stack.Pop();
 
-      _factories.TryGetValue(top, out var factory);
+      var factory = _lexer.TokenToState(top);
 
-      SkipOrThrow.NotNullable(factory);
+      factory.EnsureNotNull(() => throw new Exception($"Unable to find state for token {top}"));
 
-      return factory?.CreateState(top, _stack, _tokens, _factories);
+      return factory?.CreateState(_lexer, top, _stack, _tokens);
     }
     catch (InvalidOperationException)
     {

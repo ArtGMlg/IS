@@ -10,7 +10,16 @@ public class FinalState : IState
   }
   public IState? Next()
   {
-    SkipOrThrow.NoTokensShouldLeft(_tokens);
-    return new AcceptState();
+    try
+    {
+      (_tokens.Count() == 0).EnsureTrue(() =>
+        throw new Exception($"Input not fully consumed: Remaining {_tokens.Aggregate((res, next) => res + ' ' + next)}")
+      );
+      return new AcceptState();
+    }
+    catch (Exception err)
+    {
+      return new ErrorState(err.Message);
+    }
   }
 }

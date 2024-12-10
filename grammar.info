@@ -1,26 +1,42 @@
-S -> E
-
+S -> STATEMENTS
+STATEMENTS -> STATEMENT ; STATEMENTS
+STATEMENTS -> ε
+STATEMENT -> FUNC_DECL
+STATEMENT -> VAR_DECL
+STATEMENT -> RETURN_STMT
+STATEMENT -> E
+FUNC_DECL -> function ID ( PARAMS ) { STATEMENTS }
+PARAMS -> ID PARAMS'
+PARAMS' -> , ID PARAMS'
+PARAMS' -> ε
+VAR_DECL -> let ID = E
+RETURN_STMT -> return E
 E -> T E'
-E' -> || T E', RelOp T, ε
-
+E' -> + T E'
+E' -> - T E'
+E' -> || T E'
+E' -> && T E'
+E' -> ε
 T -> F T'
-T' -> && F T', AddOp F T', MulOp F T', return id, ε
-
-F -> ( E ), Const, Var, FuncCall, FuncDef, VarDef
-
-Const -> n, true, false
-Var -> id
-FuncCall -> name ( Args )
-
-Args -> E Args', ε
-Args' -> , E Args', ε
-
-RelOp -> ==, !=, <, >, <=, >=
-AddOp -> +, -
-MulOp -> *, /
-
-FuncDef -> function name ( Params ) { E }
-Params -> id Params', ε
-Params' -> , id Params', ε
-
-VarDef -> let id = E ;
+T' -> * F T'
+T' -> / F T'
+T' -> == F T'
+T' -> != F T'
+T' -> > F T'
+T' -> < F T'
+T' -> >= F T'
+T' -> <= F T'
+T' -> ε
+F -> PRIMARY
+PRIMARY -> ID PRIMARY'
+PRIMARY -> NUM
+PRIMARY -> true
+PRIMARY -> false
+PRIMARY -> ( E )
+PRIMARY' -> ( E_LIST )
+PRIMARY' -> ε
+E_LIST -> E E_LIST'
+E_LIST' -> , E E_LIST'
+E_LIST' -> ε
+ID -> id
+NUM -> num

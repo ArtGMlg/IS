@@ -1,14 +1,7 @@
 public class TerminalStateFactory : IStateFactory
 {
-  private readonly Dictionary<string, Dictionary<string, string>> table;
-
-  public TerminalStateFactory(Dictionary<string, Dictionary<string, string>> table)
+  public IState CreateState(LL1Lexer lexer, string symbol, Stack<string> stack, List<string> tokens)
   {
-    this.table = table;
-  }
-
-  public IState CreateState(string symbol, Stack<string> stack, List<string> tokens, Dictionary<string, IStateFactory> factories)
-  {
-    return new TerminalState(stack, tokens, table, symbol, factories);
+    return new TerminalState(lexer, stack, tokens, symbol);
   }
 }

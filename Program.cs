@@ -2,13 +2,12 @@
 {
   static void Main(string[] args)
   {
-    LL1Parser parser = new();
-
-    parser.LoadUpTable(args[0]);
+    LL1Lexer lexer = new(args[0], args[1]);
+    LL1Parser parser = new(lexer);
 
     try
     {
-      using StreamReader reader = new(args[1]);
+      using StreamReader reader = new(args[2]);
 
       string text = reader.ReadToEnd();
 

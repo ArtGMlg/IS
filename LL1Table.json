@@ -1,138 +1,147 @@
 {
   "S": {
-    "(": "E",
-    "n": "E",
+    "function": "STATEMENTS",
+    "let": "STATEMENTS",
+    "return": "STATEMENTS",
+    "true": "STATEMENTS",
+    "false": "STATEMENTS",
+    "(": "STATEMENTS",
+    "id": "STATEMENTS",
+    "num": "STATEMENTS",
+    "$": "STATEMENTS",
+    "\u03B5": "\u03B5"
+  },
+  "STATEMENTS": {
+    "function": "STATEMENT ; STATEMENTS",
+    "let": "STATEMENT ; STATEMENTS",
+    "return": "STATEMENT ; STATEMENTS",
+    "true": "STATEMENT ; STATEMENTS",
+    "false": "STATEMENT ; STATEMENTS",
+    "(": "STATEMENT ; STATEMENTS",
+    "id": "STATEMENT ; STATEMENTS",
+    "num": "STATEMENT ; STATEMENTS",
+    "$": "\u03B5",
+    "}": "\u03B5",
+    "\u03B5": "\u03B5"
+  },
+  "STATEMENT": {
+    "function": "FUNC_DECL",
+    "let": "VAR_DECL",
+    "return": "RETURN_STMT",
     "true": "E",
     "false": "E",
+    "(": "E",
     "id": "E",
-    "name": "E",
-    "function": "E",
-    "let": "E"
+    "num": "E"
+  },
+  "FUNC_DECL": {
+    "function": "function ID ( PARAMS ) { STATEMENTS }"
+  },
+  "PARAMS": {
+    "id": "ID PARAMS\u0027"
+  },
+  "PARAMS\u0027": {
+    ",": ", ID PARAMS\u0027",
+    ")": "\u03B5",
+    "\u03B5": "\u03B5"
+  },
+  "VAR_DECL": {
+    "let": "let ID = E"
+  },
+  "RETURN_STMT": {
+    "return": "return E"
   },
   "E": {
-    "(": "T E\u0027",
-    "n": "T E\u0027",
     "true": "T E\u0027",
     "false": "T E\u0027",
+    "(": "T E\u0027",
     "id": "T E\u0027",
-    "name": "T E\u0027",
-    "function": "T E\u0027",
-    "let": "T E\u0027"
+    "num": "T E\u0027"
   },
   "E\u0027": {
+    "\u002B": "\u002B T E\u0027",
+    "-": "- T E\u0027",
     "||": "|| T E\u0027",
-    "==": "RelOp T",
-    "!=": "RelOp T",
-    "\u003C": "RelOp T",
-    "\u003E": "RelOp T",
-    "\u003C=": "RelOp T",
-    "\u003E=": "RelOp T",
-    "$": "\u03B5",
+    "\u0026\u0026": "\u0026\u0026 T E\u0027",
+    ";": "\u03B5",
     ")": "\u03B5",
     ",": "\u03B5",
-    "}": "\u03B5",
-    ";": "\u03B5",
     "\u03B5": "\u03B5"
   },
   "T": {
-    "(": "F T\u0027",
-    "n": "F T\u0027",
     "true": "F T\u0027",
     "false": "F T\u0027",
+    "(": "F T\u0027",
     "id": "F T\u0027",
-    "name": "F T\u0027",
-    "function": "F T\u0027",
-    "let": "F T\u0027"
+    "num": "F T\u0027"
   },
   "T\u0027": {
-    "\u0026\u0026": "\u0026\u0026 F T\u0027",
-    "\u002B": "AddOp F T\u0027",
-    "-": "AddOp F T\u0027",
-    "*": "MulOp F T\u0027",
-    "/": "MulOp F T\u0027",
-    "return": "return id",
+    "*": "* F T\u0027",
+    "/": "/ F T\u0027",
+    "==": "== F T\u0027",
+    "!=": "!= F T\u0027",
+    "\u003E": "\u003E F T\u0027",
+    "\u003C": "\u003C F T\u0027",
+    "\u003E=": "\u003E= F T\u0027",
+    "\u003C=": "\u003C= F T\u0027",
+    "\u002B": "\u03B5",
+    "-": "\u03B5",
     "||": "\u03B5",
-    "==": "\u03B5",
-    "!=": "\u03B5",
-    "\u003C": "\u03B5",
-    "\u003E": "\u03B5",
-    "\u003C=": "\u03B5",
-    "\u003E=": "\u03B5",
-    "$": "\u03B5",
+    "\u0026\u0026": "\u03B5",
+    ";": "\u03B5",
     ")": "\u03B5",
     ",": "\u03B5",
-    "}": "\u03B5",
-    ";": "\u03B5",
     "\u03B5": "\u03B5"
   },
   "F": {
-    "(": "( E )",
-    "n": "Const",
-    "true": "Const",
-    "false": "Const",
-    "id": "Var",
-    "name": "FuncCall",
-    "function": "FuncDef",
-    "let": "VarDef"
+    "true": "PRIMARY",
+    "false": "PRIMARY",
+    "(": "PRIMARY",
+    "id": "PRIMARY",
+    "num": "PRIMARY"
   },
-  "Const": {
-    "n": "n",
+  "PRIMARY": {
+    "id": "ID PRIMARY\u0027",
+    "num": "NUM",
     "true": "true",
-    "false": "false"
+    "false": "false",
+    "(": "( E )"
   },
-  "Var": {
+  "PRIMARY\u0027": {
+    "(": "( E_LIST )",
+    "*": "\u03B5",
+    "/": "\u03B5",
+    "==": "\u03B5",
+    "!=": "\u03B5",
+    "\u003E": "\u03B5",
+    "\u003C": "\u03B5",
+    "\u003E=": "\u03B5",
+    "\u003C=": "\u03B5",
+    "\u002B": "\u03B5",
+    "-": "\u03B5",
+    "||": "\u03B5",
+    "\u0026\u0026": "\u03B5",
+    ";": "\u03B5",
+    ")": "\u03B5",
+    ",": "\u03B5",
+    "\u03B5": "\u03B5"
+  },
+  "E_LIST": {
+    "true": "E E_LIST\u0027",
+    "false": "E E_LIST\u0027",
+    "(": "E E_LIST\u0027",
+    "id": "E E_LIST\u0027",
+    "num": "E E_LIST\u0027"
+  },
+  "E_LIST\u0027": {
+    ",": ", E E_LIST\u0027",
+    ")": "\u03B5",
+    "\u03B5": "\u03B5"
+  },
+  "ID": {
     "id": "id"
   },
-  "FuncCall": {
-    "name": "name ( Args )"
-  },
-  "Args": {
-    "(": "E Args\u0027",
-    "n": "E Args\u0027",
-    "true": "E Args\u0027",
-    "false": "E Args\u0027",
-    "id": "E Args\u0027",
-    "name": "E Args\u0027",
-    "function": "E Args\u0027",
-    "let": "E Args\u0027",
-    ")": "\u03B5",
-    "\u03B5": "\u03B5"
-  },
-  "Args\u0027": {
-    ",": ", E Args\u0027",
-    ")": "\u03B5",
-    "\u03B5": "\u03B5"
-  },
-  "RelOp": {
-    "==": "==",
-    "!=": "!=",
-    "\u003C": "\u003C",
-    "\u003E": "\u003E",
-    "\u003C=": "\u003C=",
-    "\u003E=": "\u003E="
-  },
-  "AddOp": {
-    "\u002B": "\u002B",
-    "-": "-"
-  },
-  "MulOp": {
-    "*": "*",
-    "/": "/"
-  },
-  "FuncDef": {
-    "function": "function name ( Params ) { E }"
-  },
-  "Params": {
-    "id": "id Params\u0027",
-    ")": "\u03B5",
-    "\u03B5": "\u03B5"
-  },
-  "Params\u0027": {
-    ",": ", id Params\u0027",
-    ")": "\u03B5",
-    "\u03B5": "\u03B5"
-  },
-  "VarDef": {
-    "let": "let id = E ;"
+  "NUM": {
+    "num": "num"
   }
 }
