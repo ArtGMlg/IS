@@ -20,4 +20,14 @@ public class Elevator
     Console.WriteLine($"{Name}: The elevator closed the doors on {CurrentFloor} floor");
     IsDoorOpen = 0;
   }
+  public void MoveUp()
+  {
+    CurrentFloor = CurrentFloor + 1;
+    Console.WriteLine($"{Name}: The elevator went up from floor {CurrentFloor - 1} to floor {CurrentFloor}");
+  }
+  public void MoveDown()
+  {
+    CurrentFloor = CurrentFloor - 1;
+    Console.WriteLine($"{Name}: The elevator went down from floor {CurrentFloor + 1} to floor {CurrentFloor}");
+  }
 }

@@ -8,8 +8,7 @@ public class MoveUpState : IState
   }
   public IState Next()
   {
-    evaluator.GetElevator().CurrentFloor += 1;
-    Console.WriteLine($"{evaluator.GetElevator().Name}: The elevator went up from floor {evaluator.GetElevator().CurrentFloor - 1} to floor {evaluator.GetElevator().CurrentFloor}");
+    evaluator.GetElevator().MoveUp();
     return new State(evaluator);
   }
 }

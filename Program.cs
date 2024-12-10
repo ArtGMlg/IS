@@ -19,7 +19,7 @@
     .Trim()
     .Split('\n')
     .Select((s) => s.Split(' '))
-    .Select((sl) => sl.ToList().Select((f) => Convert.ToInt32(f)).ToList())
+    .Select((sl) => sl.Select((f) => Convert.ToInt32(f)).ToList())
     .ToList();
 
   ElevatorController elevatorController = new(numFloors, elevatorsInfo);
