@@ -2,12 +2,12 @@
 {
   static void Main(string[] args)
   {
-    LR1Lexer lexer = new("D:\\Новая папка\\LR1\\LR1Actions.json", "D:\\Новая папка\\LR1\\LR1Transitions.json", "D:\\Новая папка\\LR1\\grammar.txt");
+    LR1Lexer lexer = new(args[0], args[1], args[2]);
     LR1Parser parser = new(lexer);
 
     try
     {
-      using StreamReader reader = new("D:\\Новая папка\\LR1\\input.txt");
+      using StreamReader reader = new(args[3]);
 
       string text = reader.ReadToEnd();
 
