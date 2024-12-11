@@ -1,0 +1,147 @@
+{
+  "S": {
+    "function": "STATEMENTS",
+    "let": "STATEMENTS",
+    "return": "STATEMENTS",
+    "true": "STATEMENTS",
+    "false": "STATEMENTS",
+    "(": "STATEMENTS",
+    "id": "STATEMENTS",
+    "num": "STATEMENTS",
+    "$": "STATEMENTS",
+    "\u03B5": "\u03B5"
+  },
+  "STATEMENTS": {
+    "function": "STATEMENT ; STATEMENTS",
+    "let": "STATEMENT ; STATEMENTS",
+    "return": "STATEMENT ; STATEMENTS",
+    "true": "STATEMENT ; STATEMENTS",
+    "false": "STATEMENT ; STATEMENTS",
+    "(": "STATEMENT ; STATEMENTS",
+    "id": "STATEMENT ; STATEMENTS",
+    "num": "STATEMENT ; STATEMENTS",
+    "$": "\u03B5",
+    "}": "\u03B5",
+    "\u03B5": "\u03B5"
+  },
+  "STATEMENT": {
+    "function": "FUNC_DECL",
+    "let": "VAR_DECL",
+    "return": "RETURN_STMT",
+    "true": "E",
+    "false": "E",
+    "(": "E",
+    "id": "E",
+    "num": "E"
+  },
+  "FUNC_DECL": {
+    "function": "function ID ( PARAMS ) { STATEMENTS }"
+  },
+  "PARAMS": {
+    "id": "ID PARAMS\u0027"
+  },
+  "PARAMS\u0027": {
+    ",": ", ID PARAMS\u0027",
+    ")": "\u03B5",
+    "\u03B5": "\u03B5"
+  },
+  "VAR_DECL": {
+    "let": "let ID = E"
+  },
+  "RETURN_STMT": {
+    "return": "return E"
+  },
+  "E": {
+    "true": "T E\u0027",
+    "false": "T E\u0027",
+    "(": "T E\u0027",
+    "id": "T E\u0027",
+    "num": "T E\u0027"
+  },
+  "E\u0027": {
+    "\u002B": "\u002B T E\u0027",
+    "-": "- T E\u0027",
+    "||": "|| T E\u0027",
+    "\u0026\u0026": "\u0026\u0026 T E\u0027",
+    ";": "\u03B5",
+    ")": "\u03B5",
+    ",": "\u03B5",
+    "\u03B5": "\u03B5"
+  },
+  "T": {
+    "true": "F T\u0027",
+    "false": "F T\u0027",
+    "(": "F T\u0027",
+    "id": "F T\u0027",
+    "num": "F T\u0027"
+  },
+  "T\u0027": {
+    "*": "* F T\u0027",
+    "/": "/ F T\u0027",
+    "==": "== F T\u0027",
+    "!=": "!= F T\u0027",
+    "\u003E": "\u003E F T\u0027",
+    "\u003C": "\u003C F T\u0027",
+    "\u003E=": "\u003E= F T\u0027",
+    "\u003C=": "\u003C= F T\u0027",
+    "\u002B": "\u03B5",
+    "-": "\u03B5",
+    "||": "\u03B5",
+    "\u0026\u0026": "\u03B5",
+    ";": "\u03B5",
+    ")": "\u03B5",
+    ",": "\u03B5",
+    "\u03B5": "\u03B5"
+  },
+  "F": {
+    "true": "PRIMARY",
+    "false": "PRIMARY",
+    "(": "PRIMARY",
+    "id": "PRIMARY",
+    "num": "PRIMARY"
+  },
+  "PRIMARY": {
+    "id": "ID PRIMARY\u0027",
+    "num": "NUM",
+    "true": "true",
+    "false": "false",
+    "(": "( E )"
+  },
+  "PRIMARY\u0027": {
+    "(": "( E_LIST )",
+    "*": "\u03B5",
+    "/": "\u03B5",
+    "==": "\u03B5",
+    "!=": "\u03B5",
+    "\u003E": "\u03B5",
+    "\u003C": "\u03B5",
+    "\u003E=": "\u03B5",
+    "\u003C=": "\u03B5",
+    "\u002B": "\u03B5",
+    "-": "\u03B5",
+    "||": "\u03B5",
+    "\u0026\u0026": "\u03B5",
+    ";": "\u03B5",
+    ")": "\u03B5",
+    ",": "\u03B5",
+    "\u03B5": "\u03B5"
+  },
+  "E_LIST": {
+    "true": "E E_LIST\u0027",
+    "false": "E E_LIST\u0027",
+    "(": "E E_LIST\u0027",
+    "id": "E E_LIST\u0027",
+    "num": "E E_LIST\u0027"
+  },
+  "E_LIST\u0027": {
+    ",": ", E E_LIST\u0027",
+    ")": "\u03B5",
+    "\u03B5": "\u03B5"
+  },
+  "ID": {
+    "id": "id"
+  },
+  "NUM": {
+    "num": "num"
+  }
+}
